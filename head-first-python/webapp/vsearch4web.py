@@ -4,8 +4,26 @@ from vsearch import search4letters
 app = Flask(__name__)
 
 def log_request(req: 'flask_request', res: str) -> None:
-    with open ('vsearch.log', 'a') as fobj:
-        print(req.form, req.remote_addr, req.user_agent, res, file=fobj, sep='|')
+    """Журналирует веб-запрос и возвращаемые результаты."""
+    import mysql.connector
+    dbconfig = { 'host': '127.0.0.1',
+                'user': 'vsearch',
+                'password': 'vsearchpasswd',
+                'database': 'vsearchlogDB', }
+    conn = mysql.connector.connect(**dbconfig)
+    cursor = conn.cursor()
+    _SQL = """insert into log
+            (phrase, letters, ip, browser_string, results)
+            values
+            (%s, %s, %s, %s, %s)"""
+    cursor.execute(_SQL, (req.form['phrase'],
+                        req.form['letters'],
+                        req.remote_addr,
+                        req.user_agent.browser,
+                        res, ))
+    conn.commit()
+    cursor.close()
+    conn.close()
 
 @app.route('/search4', methods=['POST'])
 def do_search() -> 'html':
@@ -25,25 +43,6 @@ def do_search() -> 'html':
 def entry_page() -> 'html':
     return render_template('entry.html',
                             the_title='Welcome to search4letters on the web!')
-
-'''
-@app.route('/viewlog')
-def view_the_log() -> str:
-    with open('vsearch.log') as log:
-        contents = log.readlines()
-    return escape(''.join(contents))
-'''
-
-'''
-@app.route('/viewlog')
-def view_the_log() -> str:
-    with open('vsearch.log') as log:
-        contents = []
-        for line in log:
-            four_string = line.split('|')
-            contents.append(escape(four_string))
-    return str(contents)
-'''
 
 @app.route('/viewlog')
 def view_the_log() -> 'html':
