@@ -3,15 +3,18 @@ from vsearch import search4letters
 
 app = Flask(__name__)
 
+import mysql.connector
+
 def log_request(req: 'flask_request', res: str) -> None:
     """Журналирует веб-запрос и возвращаемые результаты."""
-    import mysql.connector
+
     dbconfig = { 'host': '127.0.0.1',
                 'user': 'vsearch',
                 'password': 'vsearchpasswd',
                 'database': 'vsearchlogDB', }
     conn = mysql.connector.connect(**dbconfig)
     cursor = conn.cursor()
+
     _SQL = """insert into log
             (phrase, letters, ip, browser_string, results)
             values
@@ -24,6 +27,7 @@ def log_request(req: 'flask_request', res: str) -> None:
     conn.commit()
     cursor.close()
     conn.close()
+
 
 @app.route('/search4', methods=['POST'])
 def do_search() -> 'html':
@@ -38,11 +42,13 @@ def do_search() -> 'html':
                             the_letters=letters,
                             the_results=results,)
 
+
 @app.route('/')
 @app.route('/entry')
 def entry_page() -> 'html':
     return render_template('entry.html',
                             the_title='Welcome to search4letters on the web!')
+
 
 @app.route('/viewlog')
 def view_the_log() -> 'html':
