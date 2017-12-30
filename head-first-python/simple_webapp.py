@@ -17,7 +17,7 @@ def page2() -> str:
     return 'This is page 2.'
 
 @app.route('/page3')
-def page2() -> str:
+def page3() -> str:
     return 'This is page 3.'
 
 @app.route('/login')
@@ -26,13 +26,13 @@ def do_login() -> str:
     return 'You are now logged in'
 
 @app.route('/logout')
-def do_login() -> str:
+def do_logout() -> str:
     session.pop('logged_in')
     return 'You are now logged out'
 
 @app.route('/status')
-def do_login() -> str:
-    if session['logged_in']:
+def check_status() -> str:
+    if 'logged_in' in session:
         return 'You are currently logged in'
     return 'You are NOT logged in'
 
