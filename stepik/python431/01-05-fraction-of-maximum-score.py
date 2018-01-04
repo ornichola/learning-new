@@ -31,8 +31,19 @@ for mark in lst:
         count += 1
 print("%.2f" % (count / len(lst)))
 
+lst = input().split()
+print("%.2f" % (lst.count('A') / len(lst)))
+
 '''
 # proper solution
-sp = input().split()
-print('{:.2f}'.format(sp.count('A') / len(sp)))
+inp = input().split()
+print('{:.2f}'.format(inp.count('A') / len(inp)))
+'''
+
+'''
+# solution with collections.Counter
+from collections import Counter
+inp = input().split()
+cnt = Counter(i)
+print('{:.2f}'.format(cnt['A'] / len(inp)))
 '''
