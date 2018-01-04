@@ -30,3 +30,9 @@ for mark in lst:
     if mark == 'A':
         count += 1
 print("%.2f" % (count / len(lst)))
+
+'''
+# proper solution
+sp = input().split()
+print('{:.2f}'.format(sp.count('A') / len(sp)))
+'''
