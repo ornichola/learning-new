@@ -34,6 +34,8 @@ def quick_math(a: float, b: float, oper: str) -> float:
     else:
         return "Cannot recognize operation"
 
+# this should be included for running tests
 if __name__ == "__main__":
     import doctest
     doctest.testmod()
+# script should be launched as: $ python modulename.py -v
