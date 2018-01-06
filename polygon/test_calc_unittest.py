@@ -12,7 +12,7 @@ class CalcTest(unittest.TestCase):
         self.assertEqual(calc.mul(5, 6), 30)
 
     def test_div(self):
-        self.assertEqual(calc.div(8, 4), 2)
+        self.assertEqual(calc.div(8, 4), 3)
 
 if __name__ == '__main__':
     unittest.main()
