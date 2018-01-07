@@ -3,6 +3,7 @@ import unittest
 
 class CalcBasicTests(unittest.TestCase):
 
+    @unittest.skip('Temporaly skip test_add')
     def test_add(self):
         self.assertEqual(calc.add(1, 2), 3)
 
@@ -15,7 +16,7 @@ class CalcBasicTests(unittest.TestCase):
     def test_div(self):
         self.assertEqual(calc.div(8, 4), 2)
 
-
+@unittest.skip('Temporaly skip CalcExtendedTests')
 class CalcExtendedTests(unittest.TestCase):
 
     def test_sqrt(self):
