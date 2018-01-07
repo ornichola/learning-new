@@ -15,5 +15,11 @@ class TestStringMethods(unittest.TestCase):
         with self.assertRaises(TypeError):
             s.split(2)
 
+# this should be included for running unittests from module
+# and then script should be launched as:
+# $ python3 modulename.py
 if __name__ == '__main__':
     unittest.main()
+
+# or we can exclude last idiom and launch test using command:
+# $ python3 -m unittest -v modulename.py
