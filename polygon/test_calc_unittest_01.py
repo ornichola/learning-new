@@ -2,6 +2,7 @@ import calc
 import unittest
 
 class CalcTest(unittest.TestCase):
+
     def test_add(self):
         self.assertEqual(calc.add(1, 2), 3)
 
@@ -13,6 +14,7 @@ class CalcTest(unittest.TestCase):
 
     def test_div(self):
         self.assertEqual(calc.div(8, 4), 3)
+
 
 if __name__ == '__main__':
     unittest.main()
