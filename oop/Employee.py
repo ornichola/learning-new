@@ -1,49 +1,26 @@
 class Employee:
 
-    raise_amount = 1.04
-
-    def __init__(self, first, last, pay):
+    def __init__(self, first, last):
         self.first = first
         self.last = last
-        self.pay = pay
         self.email = first + '.' + last + '@company.com'
 
     def fullname(self):
         return '{} {}'.format(self.first, self.last)
 
-    def apply_raise(self):
-        self.pay = int(self.pay * self.raise_amount)
 
-    def __repr__(self):
-        return "Employee('{}', '{}', {})".format(self.first, self.last, self.pay)
+emp_1 = Employee('Niko', 'Learner')
 
-    def __str__(self):
-        return '{} - {}'.format(self.fullname(), self.email)
+# Without sentence below output of $ python3 Employee.py will be:
+# Niko
+# Niko.Learner@company.com
+# Niko Learner
+emp_1.first = 'Jim'
+# but with this sentence output will be:
+# Jim
+# Niko.Learner@company.com
+# Jim Learner
 
-    def __add__(self, other):
-        return self.pay + other.pay
-
-    def __len__(self):
-        return len(self.fullname())
-
-
-emp_1 = Employee('Niko', 'Learner', 120000)
-emp_2 = Employee('John', 'Smith', 100000)
-
-print(emp_1)
-print()
-print(repr(emp_1))
-print(str(emp_1))
-print()
-print(emp_1.__repr__())
-print(emp_1.__str__())
-print()
-print(1 + 2)
-print(int.__add__(1, 2))
-print()
-print(emp_1 + emp_2)
-print()
-print(len('test'))
-print('test'.__len__())
-print()
-print(len(emp_1))
+print(emp_1.first)
+print(emp_1.email)
+print(emp_1.fullname())
