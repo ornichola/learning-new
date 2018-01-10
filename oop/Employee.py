@@ -20,6 +20,12 @@ class Employee:
     def __str__(self):
         return '{} - {}'.format(self.fullname(), self.email)
 
+    def __add__(self, other):
+        return self.pay + other.pay
+
+    def __len__(self):
+        return len(self.fullname())
+
 
 emp_1 = Employee('Niko', 'Learner', 120000)
 emp_2 = Employee('John', 'Smith', 100000)
@@ -31,3 +37,13 @@ print(str(emp_1))
 print()
 print(emp_1.__repr__())
 print(emp_1.__str__())
+print()
+print(1 + 2)
+print(int.__add__(1, 2))
+print()
+print(emp_1 + emp_2)
+print()
+print(len('test'))
+print('test'.__len__())
+print()
+print(len(emp_1))
