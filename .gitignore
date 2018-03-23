@@ -104,3 +104,6 @@ env*/
 
 # mypy
 .mypy_cache/
+
+# IDEA files
+.idea/
