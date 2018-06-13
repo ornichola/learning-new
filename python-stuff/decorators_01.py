@@ -48,3 +48,24 @@ def say(name, last_name):
 
 
 say('Niko', 'O')
+
+
+print()
+
+
+class DecoratorClass(object):
+
+    def __init__(self, func):
+        self.func = func
+
+    def __call__(self, *args, **kwargs):
+        print('call method executed this before {}'.format(self.func.__name__))
+        return self.func(*args, **kwargs)
+
+
+@DecoratorClass
+def display():
+    print('display function ran')
+
+
+display()
