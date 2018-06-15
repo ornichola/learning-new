@@ -1,6 +1,14 @@
+"""
+https://docs.python.org/3/library/functools.html
+https://python-scripts.com/import-functools
+"""
+
+
 from functools import lru_cache
 """
 https://docs.python.org/3/library/functools.html#functools.lru_cache
+Оборачивает функцию вызываемым запоминанием, которое сохраняет максимальное количество всех последних вызовов.
+
 Сохраняет результаты maxsize последних вызовов.
 Это может сэкономить время при дорогих вычислениях, если функция периодически вызывается с теми же аргументами.
 """
@@ -30,6 +38,14 @@ in a new object with a simplified signature.
 base_two = partial(int, base=2)
 base_two.__doc__ = 'Convert base 2 string to an int'
 print(base_two('10010'))
+
+
+def add(x, y):
+    return x + y
+
+
+p_add = partial(add, 2)
+print(p_add(4))  # 6
 
 
 print('-' * 79)
