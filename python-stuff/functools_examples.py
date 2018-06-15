@@ -101,3 +101,68 @@ def _(arg, verbose=False):
 fun('Hi!', verbose=True)
 fun(1337, verbose=True)
 fun([0, 1, 2], verbose=True)
+
+
+print('-' * 79)
+
+
+from functools import reduce
+"""
+Apply function of two arguments cumulatively to the items of sequence, from left to right, so as to 
+reduce the sequence to a single value.
+Берёт два первых элемента, применяет к ним функцию, берёт значение и третий элемент, и таким образом 
+сворачивает iterable в одно значение
+"""
+
+
+print(reduce(lambda x, y: x+y, [1, 2, 3, 4, 5]))  # 15 -- = ((((1+2)+3)+4)+5 --
+
+
+print('-' * 79)
+
+
+from functools import wraps
+"""
+This is a convenience function for invoking update_wrapper() as a function decorator when defining a wrapper function. 
+It is equivalent to partial(update_wrapper, wrapped=wrapped, assigned=assigned, updated=updated).
+"""
+
+
+def my_decorator(f):
+    @wraps(f)
+    def wrapper(*args, **kwds):
+        print('Calling decorated function')
+        return f(*args, **kwds)
+    return wrapper
+
+
+@my_decorator
+def example():
+    """Docstring"""
+    print('Called example function')
+
+
+example()
+
+
+print(example.__name__)
+print(example.__doc__)
+
+
+"""
+if not using @wraps(f):
+---
+Calling decorated function
+Called example function
+wrapper
+None
+---
+
+else:
+---
+Calling decorated function
+Called example function
+example
+Docstring
+---
+"""
