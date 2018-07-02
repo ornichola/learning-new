@@ -1,12 +1,8 @@
-L = [1, 2, 4, 8, 16, 32, 64]
+L = []
+for i in range(8):
+    L.append(2 ** i)
 X = 5
-found = False
-i = 0
-while not found and i < len(L):
-    if 2 ** X == L[i]:
-        print('at index', i)
-        break
-    else:
-        i = i+1
+if 2 ** X in L:
+    print('at index', L.index(2 ** X))
 else:
     print(X, 'not found')
