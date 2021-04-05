@@ -1,5 +1,3 @@
-# KNOWN ISSUES -> wrong initial positions of racers
-
 import random
 import turtle
 
@@ -36,26 +34,33 @@ def init_screen() -> turtle.Screen:
     _screen = turtle.Screen()
     _screen.setup(WIDTH, HEIGHT)
     _screen.title('Turtle Racing')
+    _screen.bgcolor('grey')
     return _screen
 
 
-def compute_racers(number_of_racers: int):
-    number_of_racers = number_of_racers - 1
+def compute_positions(number_of_racers) -> [dict]:
+    positions = list()
+    placing_start, placing_end = -WIDTH // 2 + WIDTH * 0.1, WIDTH // 2 - WIDTH * 0.1
+    spacing_x = (placing_end - placing_start) // (number_of_racers - 1)
+    for i in range(number_of_racers):
+        positions.append({
+            'x': placing_start + i * spacing_x,
+            'y': -HEIGHT // 2 + 20,
+        })
+    return positions
+
+
+def place_racers_at_positions(positions: [dict]):
     racers = list()
-    spacing_x = WIDTH // number_of_racers
-    racers_colors = random.sample(COLORS, number_of_racers)
-    for i, color in enumerate(racers_colors, start=1):
+    racers_colors = random.sample(COLORS, len(positions))
+    for color, position in zip(racers_colors, positions):
         racer = turtle.Turtle()
         racer.color(color)
         racer.shape('turtle')
-        racer.penup()                                           # ?
-        racer.setpos(
-            x=-WIDTH // 2 + i * spacing_x,
-            y=-HEIGHT // 2 + 20
-        )
-        racer.pendown()                                         # ?
+        racer.penup()
+        racer.setpos(**position)
         racer.left(90)
-        racer.speed(0)
+        racer.pendown()
         racers.append(racer)
     return racers
 
@@ -70,8 +75,6 @@ def race(racers: list[turtle.Turtle]):
 
 
 if __name__ == '__main__':
-    # number_of_racers = get_number_of_racers()
-    number_of_racers = 10
     screen = init_screen()
-    winner = race(compute_racers(number_of_racers))
+    winner = race(place_racers_at_positions(compute_positions(get_number_of_racers())))
     print(f'{winner.color()[0].capitalize()} turtle wins!')
