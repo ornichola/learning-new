@@ -35,7 +35,7 @@ class MoneyBox:
         self.coins = 0
 
     def can_add(self, v: int):
-        return True if self.capacity - self.coins >= v else False
+        return self.capacity - self.coins >= v
 
     def add(self, v: int):
         if self.can_add(v):
