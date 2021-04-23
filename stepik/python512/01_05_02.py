@@ -51,17 +51,13 @@ class Buffer:
 
     def __init__(self):
         self.seq = list()
-        self.agr = 0
 
     def add(self, *a):
-        self.seq.extend(a)
-        while len(self.seq) >= 5:
-            self.agr = sum(self.seq[:5])
-            self.seq.reverse()
-            [self.seq.pop() for _ in range(5)]
-            self.seq.reverse()
-            print(self.agr)
+        for i in a:
+            self.seq.append(i)
+            if len(self.seq) == 5:
+                print(sum(self.seq))
+                self.seq.clear()
 
     def get_current_part(self):
-        if len(self.seq) < 5:
-            return self.seq
+        return self.seq
