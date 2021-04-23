@@ -1,4 +1,10 @@
 """
+[STEPIK]
+Python: основы и применение https://stepik.org/512
+01_04_01 Пространства имён и области видимости
+"""
+
+"""
 Реализуйте программу, которая будет эмулировать работу с пространствами имен. Необходимо реализовать поддержку создания пространств имен и добавление в них переменных.
 
 В данной задаче у каждого пространства имен есть уникальный текстовый идентификатор – его имя.
@@ -50,7 +56,7 @@ def foo():
 
 <namespace>, если в пространстве <namespace> была объявлена переменная <var>
 get <parent> <var> – результат запроса к пространству, внутри которого было создано пространство <namespace>, если переменная не была объявлена
-None, если не существует <parent>, т. е. <namespace>﻿ – это global
+None, если не существует <parent>, т. е. <namespace> – это global
 Формат входных данных
 В первой строке дано число n (1 ≤ n ≤ 100) – число запросов.
 В каждой из следующих n строк дано по одному запросу.
@@ -69,35 +75,33 @@ NAMESPACES = {
 }
 
 
-def create(space, parent):
-    NAMESPACES[space] = {
-        'vars': [],
-        'parent': parent,
-    }
-
-
-def add(space, var):
-    for name in NAMESPACES:
-        if name == space:
-            NAMESPACES[name]['vars'].append(var)
-
-
-def get(space, var):
-    if space is None:
-        # return None
+# рекурсивное решение
+def get(name, var):
+    if name is None:
         print(None)
-    elif var in NAMESPACES[space]['vars']:
-        # return space
-        print(space)
+    elif var in NAMESPACES[name]['vars']:
+        print(name)
     else:
-        get(NAMESPACES[space]['parent'], var)
+        get(NAMESPACES[name]['parent'], var)
 
 
 for _ in range(int(input())):
     cmd, namespace, arg = input().split(' ')
     if cmd == 'create':
-        create(namespace, arg)
-    if cmd == 'add':
-        add(namespace, arg)
-    if cmd == 'get':
-        get(namespace, arg)
+        NAMESPACES.update({namespace: {'vars': [], 'parent': arg}})
+    elif cmd == 'add':
+        space = NAMESPACES.get(namespace)
+        space.get('vars').append(arg) if space else None
+    elif cmd == 'get':
+        # get(namespace, arg)  # рекурсия
+        while namespace is not None:
+            space = NAMESPACES.get(namespace)
+            if space and arg in space.get('vars'):
+                print(namespace)
+                break
+            else:
+                namespace = space['parent']
+        else:
+            print(None)
+    else:
+        raise ValueError
