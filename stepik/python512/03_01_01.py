@@ -47,21 +47,13 @@ Sample Output 4:
 Impossible
 """
 
-init_str = input()
-a = input()
-b = input()
-counter = 0
+s, a, b, counter = input(), input(), input(), 0
 
-modified = init_str
-while counter < 1000:
-    if a not in init_str:
-        print(counter)
-        break
-    str_before = modified
-    modified = modified.replace(a, b)
-    if str_before == modified and modified != init_str:
-        print(counter)
-        break
-    counter += 1
-else:
+if a not in s:
+    print(0)
+elif a in b:
     print('Impossible')
+else:
+    while a in s:
+        s, counter = s.replace(a, b), counter + 1
+    print(counter)
