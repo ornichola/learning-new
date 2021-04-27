@@ -24,4 +24,6 @@ import sys
 
 for line in sys.stdin:
     line = line.rstrip()
-    print(re.sub(r'(\b\w{2})', lambda s: ''.join(list(s.group(1))[::-1]), line))
+    # # https://docs.python.org/3/library/re.html#text-munging
+    # print(re.sub(r'(\b\w{2})', lambda s: ''.join(list(s.group(1))[::-1]), line))
+    print(re.sub(r'\b(\w)(\w)(\w*)', r'\2\1\3', line))
