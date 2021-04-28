@@ -37,15 +37,25 @@ Sample Output:
 01001
 """
 
+# import re
+# import sys
+#
+#
+# for line in sys.stdin:
+#     line = line.rstrip()
+#     match = re.search(r'^([0-1]+)$', line)
+#     if match:
+#         binary = match.group(0)
+#         dec = int(binary, base=2)
+#         if dec % 3 == 0:
+#             print(binary)
+
 import re
 import sys
 
-
+pattern = "^(0|(1(01*0)*1))*$"
+pattern = re.compile(pattern)
 for line in sys.stdin:
     line = line.rstrip()
-    match = re.search(r'^([0-1]+)$', line)
-    if match:
-        binary = match.group(0)
-        dec = int(binary, base=2)
-        if dec % 3 == 0:
-            print(binary)
+    if pattern.match(line):
+        print(line)
