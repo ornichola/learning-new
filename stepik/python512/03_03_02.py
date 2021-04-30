@@ -38,6 +38,7 @@ import requests
 
 PATTERN = r'<a.*?href.*?=.*?[\"|\'](((.*?):\/\/)|(\.\.)|)(.*?)(\/|:|\"|\').*'
 
+# DEBUG inputs https://pastebin.com/raw/2mie4QYa
 domains = [split[4] for split in re.findall(PATTERN, requests.get(input()).text) if split]
 
 for domain in sorted(set(domains)):
