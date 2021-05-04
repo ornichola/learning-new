@@ -65,3 +65,17 @@ parser.feed(input())
 weighted_colors = parser.close()
 
 print(f'{weighted_colors["red"]} {weighted_colors["green"]} {weighted_colors["blue"]}')
+
+# # Recursion
+# tree = ET.fromstring(input())
+# colors = {'red': 0, 'green': 0, 'blue': 0}
+#
+#
+# def count_weights(root, weight):
+#     colors[root.attrib['color']] += weight
+#     for child in root:
+#         count_weights(child, weight+1)
+#
+#
+# count_weights(tree, 1)
+# print(colors["red"], colors["green"], colors["blue"])
