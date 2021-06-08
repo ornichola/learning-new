@@ -43,60 +43,19 @@ Sample Output 3:
 
 # т.к. задача в модуле if else реализовано такое решение
 
-# a1, b1, a2, b2 = [int(input()) for _ in range(4)]
+a1, b1, a2, b2 = [int(input()) for _ in range(4)]
 
-
-def intersect(a1, b1, a2, b2):
-    # 1
-    if a1 <= a2 and b1 >= b2:
-        # print(a2, b2)
-        return a2, b2
-    # 2
-    elif a2 <= a1 and b2 >= b1:
-        # print(a1, b1)
-        return a1, b1
-    # 3 1
-    elif a1 < a2 < b1 and a2 < b1 < b2:
-        # print(a2, b1)
-        return a2, b1
-    # 3 2
-    elif a2 < a1 < b2 and a1 < b2 < b1:
-        # print(a1, b2)
-        return a1, b2
-    # 3 3
-    elif b1 == a2 and b1 < b2:
-        # print(b1)
-        return b1
-    # 3 4
-    elif b2 == a1 and b2 < b1:
-        # print(b2)
-        return b2
-    else:
-        # print('пустое множество')
-        return 'пустое множество'
-
-
-# Testing
-tests = {
-    (1, 5, 6, 10): 'пустое множество',
-    (6, 10, 1, 5): 'пустое множество',
-    (1, 10, 3, 5): (3, 5),
-    (1, 5, 3, 7): (3, 5),
-    (3, 7, 1, 5): (3, 5),
-    (3, 5, 1, 10): (3, 5),
-    (1, 5, 5, 10): 5,
-    (5, 10, 1, 5): 5,
-    (1, 5, 1, 5): (1, 5),
-    (1, 5, 1, 10): (1, 5),
-    (5, 10, 1, 10): (5, 10),
-    (1, 10, 5, 10): (5, 10),
-    (1, 10, 1, 5): (1, 5),
-}
-
-for k, v in tests.items():
-    if not intersect(*k) == v:
-        print()
-        print(k)
-        print(v)
-        print(intersect(*k))
-        print()
+if a1 <= a2 and b1 >= b2:
+    print(a2, b2)
+elif a2 <= a1 and b2 >= b1:
+    print(a1, b1)
+elif a1 < a2 < b1 and a2 < b1 < b2:
+    print(a2, b1)
+elif a2 < a1 < b2 and a1 < b2 < b1:
+    print(a1, b2)
+elif b1 == a2 and b1 < b2:
+    print(b1)
+elif b2 == a1 and b2 < b1:
+    print(b2)
+else:
+    print('пустое множество')
