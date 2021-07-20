@@ -1,0 +1,1 @@
+Код по урокам [Асинхронность в Python](https://www.youtube.com/watch?v=ZGfv_yRLBiY&list=PLlWXhlUMyooawilqK4lPXRvxtbYiw34S8). 
