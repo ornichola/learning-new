@@ -107,3 +107,6 @@ env*/
 
 # IDEA files
 .idea/
+
+# macOS
+.DS_Store
