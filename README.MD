@@ -14,3 +14,4 @@ Dump repo with solved tasks and assignments from books, online code tutors and o
  
 ### Solving
 1. ["Поколение Python": курс для начинающих](https://stepik.org/course/58852) 
+2. [JetBrains Academy / Hyperskill - Python Core](https://hyperskill.org/tracks/2) 
