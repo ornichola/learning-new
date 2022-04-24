@@ -29,14 +29,15 @@ class CoffeeMachine:
             }
         )
 
-    # __str__
-    def show_state(self):
-        print('The coffee machine has:')
-        print(f'{self.water} of water')
-        print(f'{self.milk} of milk')
-        print(f'{self.beans} of coffee beans')
-        print(f'{self.cups} of disposable cups')
-        print(f'${self.money} of money')
+    def __str__(self):
+        resources = [
+            f'{self.water} of water',
+            f'{self.milk} of milk',
+            f'{self.beans} of coffee beans',
+            f'{self.cups} of disposable cups',
+            f'${self.money} of money',
+        ]
+        return 'The coffee machine has:\n' + '\n'.join(resources)
 
     def _check_resources(self, coffee_type):
         state = {
@@ -100,7 +101,7 @@ class CoffeeMachine:
             elif action == 'take':
                 self.take()
             elif action == 'remaining':
-                self.show_state()
+                print(self)
             else:
                 continue
 
