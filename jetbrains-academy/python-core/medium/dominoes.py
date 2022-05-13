@@ -78,18 +78,26 @@ class DominoesGame:
         else:
             print('Something went completely wrong')
 
+    def _handle_user_input(self):
+        while True:
+            try:
+                domino_index = int(input())
+                if abs(domino_index) not in range(0, len(self.pieces_player) + 1):
+                    raise ValueError
+                return domino_index
+            except ValueError:
+                print('Invalid input. Please try again.')
+                continue
+
     def make_player_move(self):
         while True:
-            while True:
-                try:
-                    domino_index = int(input())
-                    if abs(domino_index) not in range(0, len(self.pieces_player) + 1):
-                        raise ValueError
-                    break
-                except ValueError:
-                    print('Invalid input. Please try again.')
-                    continue
-            if domino_index != 0:
+            domino_index = self._handle_user_input()
+            if domino_index == 0:
+                if self.dominoes:
+                    self.pieces_player.append(
+                        self.dominoes.pop(self.dominoes.index(random.choice(self.dominoes)))
+                    )
+            else:
                 index = abs(domino_index) - 1
                 domino = self.pieces_player.pop(index)
 
@@ -104,19 +112,22 @@ class DominoesGame:
                     domino.reverse()
 
                 self.line.append(domino) if domino_index > 0 else self.line.insert(0, domino)
-                self.switch_turn()
-                break
-            else:
-                if self.dominoes:
-                    self.pieces_player.append(
-                        self.dominoes.pop(self.dominoes.index(random.choice(self.dominoes))))
-                    self.switch_turn()
-                break
+
+            self.switch_turn()
+            break
+
+    def analyze_best_move(self):
+        values = {value: 0 for value in range(0, 7)}
+        prepared = [value for domino in self.line + self.pieces_computer for value in domino]
+        for value in values:
+            values[value] = prepared.count(value)
+
+        # sort hand by scores
+        self.pieces_computer.sort(key=lambda domino: sum(values.get(value) for value in domino))
 
     def make_computer_move(self):
         input()
-        self.switch_turn()
-
+        self.analyze_best_move()
         # handling computer move
         borders = {'left': self.line[0][0], 'right': self.line[-1][-1]}
         for choice in self.pieces_computer:
@@ -135,6 +146,8 @@ class DominoesGame:
         else:
             if self.dominoes:
                 self.pieces_computer.append(self.dominoes.pop(self.dominoes.index(random.choice(self.dominoes))))
+
+        self.switch_turn()
 
     def game_loop(self):
         while not self.winner:
