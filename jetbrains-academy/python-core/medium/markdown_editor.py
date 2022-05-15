@@ -15,7 +15,7 @@ def format_header() -> str:
         try:
             level = int(input("Level: "))
             if 1 <= level <= 6:
-                if formatted:  # kludge for new-line if heading among other text
+                if formatted:
                     return f'\n{"#" * level} {input("Text: ")}\n'
                 return f'{"#" * level} {input("Text: ")}\n'
             raise ValueError
@@ -79,9 +79,10 @@ while True:
         print(f'Available formatters: {" ".join(formatters)}')
         print(f'Special commands: {" ".join(special_commands)}')
     elif chose == '!done':
+        with open('output.md', 'w') as f:
+            f.write(''.join(formatted))
         break
     else:
-        print('Unknown formatting type or command', end='')  # end='' is another kludge for tests
-        # print('Unknown formatting type or command')
+        print('Unknown formatting type or command')
 
     print(''.join(formatted))
