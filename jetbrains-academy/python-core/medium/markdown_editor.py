@@ -35,6 +35,22 @@ def format_new_line() -> str:
     return '\n'
 
 
+def format_list(format_type: str) -> [str]:
+    rows = list()
+    while True:
+        rows_num = input('Number of rows: ')
+        try:
+            rows_num = int(rows_num)
+            if rows_num >= 1:
+                for i in range(rows_num):
+                    prefix = f'{i + 1}.' if format_type == 'ordered-list' else '*'
+                    rows.append(f'{prefix} {input(f"Row #{i + 1}: ")}\n')
+                return rows
+            raise ValueError
+        except ValueError:
+            print('The number of rows should be greater than zero')
+
+
 formatters = {
     'plain': format_plain,
     'bold': format_bold,
@@ -43,6 +59,8 @@ formatters = {
     'link': format_link,
     'inline-code': format_inline_code,
     'new-line': format_new_line,
+    'ordered-list': format_list,
+    'unordered-list': format_list,
 }
 special_commands = {
     '!help': '',
@@ -53,14 +71,17 @@ formatted = list()
 while True:
     chose = input('Choose a formatter: ')
     if chose in formatters:
-        formatted.append(formatters[chose]())
+        if chose in ('ordered-list', 'unordered-list'):
+            formatted.extend(formatters[chose](chose))
+        else:
+            formatted.append(formatters[chose]())
     elif chose == '!help':
         print(f'Available formatters: {" ".join(formatters)}')
         print(f'Special commands: {" ".join(special_commands)}')
     elif chose == '!done':
         break
     else:
-        # print('Unknown formatting type or command', end='')  # end='' is another kludge for tests
-        print('Unknown formatting type or command')
+        print('Unknown formatting type or command', end='')  # end='' is another kludge for tests
+        # print('Unknown formatting type or command')
 
     print(''.join(formatted))
