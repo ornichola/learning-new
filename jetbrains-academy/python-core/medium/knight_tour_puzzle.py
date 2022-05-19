@@ -27,7 +27,7 @@ while True:
 # placing knight
 for i in range(dimensions[1]):      # rows      0 1 2 3 4 (5)       for 6 5 input in dimension
     for j in range(dimensions[0]):  # columns   0 1 2 3 4 5 (6)     for 6 5 input in dimension
-        # this is very fragile solution
+        # represent python form of list indexes as human-readable and as expected in tests
         column_id = j + 1
         row_id = dimensions[1] - i
         if [column_id, row_id] == position:
@@ -35,6 +35,21 @@ for i in range(dimensions[1]):      # rows      0 1 2 3 4 (5)       for 6 5 inpu
             cell = list(board[i][j])
             cell = [' ' for _ in cell]
             cell[-1] = 'X'
+            board[i][j] = ''.join(cell)
+
+
+# placing first possible moves
+for i in range(dimensions[1]):
+    for j in range(dimensions[0]):
+        column_id = j + 1
+        row_id = dimensions[1] - i
+        # L-shape move is possible if diff between axes and initial position is 2, 1 or 1, 2
+        vertical_possibility = abs(position[0] - column_id) == 2 and abs(position[1] - row_id) == 1
+        horizontal_possibility = abs(position[0] - column_id) == 1 and abs(position[1] - row_id) == 2
+        if vertical_possibility or horizontal_possibility:
+            cell = list(board[i][j])
+            cell = [' ' for _ in cell]
+            cell[-1] = 'O'
             board[i][j] = ''.join(cell)
 
 
