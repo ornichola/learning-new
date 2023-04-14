@@ -4,7 +4,7 @@ NUMS = [
 ]
 
 
-def task01(nums: [int]):
+def task_01(nums: [int]):
     """
     Дан некоторый список чисел.
     Необходимо написать код, который последовательно выводит нечетные числа данного списка,
@@ -12,6 +12,7 @@ def task01(nums: [int]):
     Если мы встречаем число 666 повторно - снова начинаем вывод, только уже четных чисел.
     И так далее.
     """
+
     print_flag, parity = True, True
     for num in nums:
         if num == 666:
@@ -22,5 +23,18 @@ def task01(nums: [int]):
             if print_flag and num % 2 == parity:
                 print(num)
 
+def task_02(num: int):
+    """
+    Напишите функцию, которая при заданном целом числе n складывает цифры этого числа и выводит результат.
+    """
 
-task01(NUMS)
+    _sum = 0
+    while num:
+        _sum += num % 10
+        num //= 10
+    print(_sum)
+
+
+if __name__ == '__main__':
+    # task_01(NUMS)
+    task_02(1234567890)
