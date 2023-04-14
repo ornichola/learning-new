@@ -23,6 +23,7 @@ def task_01(nums: [int]):
             if print_flag and num % 2 == parity:
                 print(num)
 
+
 def task_02(num: int):
     """
     Напишите функцию, которая при заданном целом числе n складывает цифры этого числа и выводит результат.
@@ -35,6 +36,20 @@ def task_02(num: int):
     print(_sum)
 
 
+def task_03(dictionary: dict):
+    """
+    Найдите два ключа с самыми большими значениями в словаре.
+    """
+
+    if len(dictionary) < 2:
+        raise ValueError(f'В словаре {dictionary} меньше двух ключей')
+    d = dict()
+    biggest = sorted(dictionary.items(), key=lambda x: x[1], reverse=True)[:2]
+    d[biggest[0][0]], d[biggest[1][0]] = biggest[0][1], biggest[1][1]
+    print(d)
+
+
 if __name__ == '__main__':
     # task_01(NUMS)
-    task_02(1234567890)
+    # task_02(1234567890)
+    task_03({'a':500, 'b':5874, 'c': 560,'d':400, 'e':5874, 'f': 20})
