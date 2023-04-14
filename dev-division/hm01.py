@@ -47,6 +47,7 @@ def task_03(dictionary: dict):
     biggest = sorted(dictionary.items(), key=lambda x: x[1], reverse=True)[:2]
     d[biggest[0][0]], d[biggest[1][0]] = biggest[0][1], biggest[1][1]
     print(d)
+    # print(sorted(dictionary, key=dictionary.get)[-2:])
 
 
 if __name__ == '__main__':
