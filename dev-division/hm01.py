@@ -40,6 +40,7 @@ def task_03(dictionary: dict):
     """
     Найдите два ключа с самыми большими значениями в словаре.
     """
+    # https://stackoverflow.com/questions/613183/how-do-i-sort-a-dictionary-by-value
 
     if len(dictionary) < 2:
         raise ValueError(f'В словаре {dictionary} меньше двух ключей')
@@ -47,6 +48,8 @@ def task_03(dictionary: dict):
     biggest = sorted(dictionary.items(), key=lambda x: x[1], reverse=True)[:2]
     d[biggest[0][0]], d[biggest[1][0]] = biggest[0][1], biggest[1][1]
     print(d)
+
+    # https://stackoverflow.com/questions/39496096/understanding-dictionary-get-in-python
     # print(sorted(dictionary, key=dictionary.get)[-2:])
 
 
