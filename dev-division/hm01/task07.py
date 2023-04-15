@@ -11,7 +11,7 @@ def timeit(f):
     def wrapper(*args, **kwargs):
         time_start = time.time()
         f(*args, **kwargs)
-        print(f'Took: {time.time() - time_start}')
+        print(f'Function "{f.__name__}" took: {time.time() - time_start}')
     return wrapper
 
 @timeit
