@@ -110,42 +110,29 @@ def task_05():
 
     while True:
         command = input('Выберите действие: 1 (+), 2 (-), 3 (*), 4 (/): ')
+        if command not in '1234':
+            print('Ошибка. Выберите значения: 1 (+), 2 (-), 3 (*), 4 (/)')
+            continue
+
+        a, b = input('Введите первое число: '), input('Введите второе число: ')
+        try:
+            a, b = float(a), float(b)
+        except ValueError:
+            print('На ввод принимаются только числовые значения')
+            continue
+
         match command:
             case '1':
-                a, b = input('Введите первое число: '), input('Введите второе число: ')
-                try:
-                    a, b = float(a), float(b)
-                except ValueError:
-                    print('На ввод принимаются только числовые значения')
                 print(f'{a} + {b} = {a + b}')
             case '2':
-                a, b = input('Введите первое число: '), input('Введите второе число: ')
-                try:
-                    a, b = float(a), float(b)
-                except ValueError:
-                    print('На ввод принимаются только числовые значения')
                 print(f'{a} - {b} = {a - b}')
             case '3':
-                a, b = input('Введите первое число: '), input('Введите второе число: ')
-                try:
-                    a, b = float(a), float(b)
-                except ValueError:
-                    print('На ввод принимаются только числовые значения')
                 print(f'{a} * {b} = {a * b}')
             case '4':
-                a, b = input('Введите первое число: '), input('Введите второе число: ')
-                try:
-                    a, b = float(a), float(b)
-                except ValueError:
-                    print('На ввод принимаются только числовые значения')
-
-                try:
-                    r = a / b
-                    print(f'{a} / {b} = {r}')
-                except ZeroDivisionError:
+                if not b:
                     print('На ноль делить нельзя')
-            case _:
-                print('Ошибка. Выберите значения: 1 (+), 2 (-), 3 (*), 4 (/)')
+                    continue
+                print(f'{a} / {b} = {a / b}')
 
 if __name__ == '__main__':
     # task_01(NUMS)
